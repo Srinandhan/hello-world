@@ -5,11 +5,11 @@ import textract
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
-filename = 'filename1.pdf'
+filename = 'filetobeparsed.pdf'
 pdfFileObj = open(filename,'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 #The pdfReader variable is a readable object that will be parsed
-#discerning the number of pages will allow us to parse through all 
+#discerning the number of pages will allow parsing through all 
 #the pages
 num_pages = pdfReader.numPages
 count = 0
@@ -24,21 +24,21 @@ while count < num_pages:
 if text != "":
    text = text
 
-#If the above returns as False, we run the OCR library textract to #convert scanned/image based PDF files into text
+#If the above returns as False, we run the textract to #convert scanned/image based PDF files into text (Optical Character Recognition)
 
 else:
 	text = textract.process(fileurl, method='tesseract', language='eng')
  
 tokens = word_tokenize(text)
 
-#we'll create a new list which contains punctuation we wish to clean
+#creating a new list that contains punctuations, to be cleaned
 punctuations = ['(',')',';',':','[',']',',']
 
-#We initialize the stopwords variable which is a list of words like #"The", "I", "and", etc. that don't hold much value as keywords
+#Initializing the stopwords variable which is a list of words like #"The", "I", "and", etc. that don't hold much value as keywords
 
 stop_words = stopwords.words('english')
 
-#We create a list comprehension which only returns a list of words #that are NOT IN stop_words and NOT IN punctuations.
+#keywords list that returns only a list of words NOT IN stop_words and NOT IN punctuations.
 
 keywords = [word for word in tokens if not word in stop_words and not word in punctuations]
 print(keywords, file=open('newparse.xls','w'))
