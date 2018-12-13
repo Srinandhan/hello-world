@@ -5,7 +5,7 @@ import textract
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
-filename = '_2-FINAL - BMRN TMP order to caseh - PO_101_208764_0_US.pdf'
+filename = 'filename1.pdf'
 pdfFileObj = open(filename,'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 #The pdfReader variable is a readable object that will be parsed
